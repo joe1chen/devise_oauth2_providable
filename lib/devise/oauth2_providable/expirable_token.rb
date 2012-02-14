@@ -1,5 +1,5 @@
 require 'active_support/concern'
-require 'active_record'
+require 'mongoid'
 
 module Devise
   module Oauth2Providable
@@ -12,7 +12,7 @@ module Devise
           self.default_lifetime = Rails.application.config.devise_oauth2_providable[config_name]
 
           belongs_to :user
-          belongs_to :client
+          belongs_to :client, :class_name=> "Devise::Oauth2Providable::Client"
 
           after_initialize :init_token, :on => :create, :unless => :token?
           after_initialize :init_expires_at, :on => :create, :unless => :expires_at?
@@ -21,7 +21,8 @@ module Devise
           validates :token, :presence => true, :uniqueness => true
 
           scope :not_expired, lambda {
-            where(self.arel_table[:expires_at].gteq(Time.now.utc))
+            #where(self.arel_table[:expires_at].gteq(Time.now.utc))
+             self.where(:expires_at.gt => Time.now.utc)
           }
           default_scope not_expired
 
@@ -54,4 +55,4 @@ module Devise
   end
 end
 
-ActiveRecord::Base.send :include, Devise::Oauth2Providable::ExpirableToken
+#ActiveRecord::Base.send :include, Devise::Oauth2Providable::ExpirableToken

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Devise::Oauth2Providable::Client do
-  it { Devise::Oauth2Providable::Client.table_name.should == 'oauth2_clients' }
+ # it { Devise::Oauth2Providable::Client.table_name.should == 'oauth2_clients' }
 
   describe 'basic client instance' do
     with :client
@@ -12,9 +12,9 @@ describe Devise::Oauth2Providable::Client do
     it { should validate_presence_of :website }
     it { should allow_mass_assignment_of :website }
     it { should allow_mass_assignment_of :redirect_uri }
-    it { should validate_uniqueness_of :identifier }
-    it { should have_db_index(:identifier).unique(true) }
-    it { should_not allow_mass_assignment_of :identifier }
+    it { should validate_uniqueness_of :cidentifier }
+    it { should have_db_index(:cidentifier).unique(true) }
+    it { should_not allow_mass_assignment_of :cidentifier }
     it { should_not allow_mass_assignment_of :secret }
     it { should have_many :refresh_tokens }
     it { should have_many :authorization_codes }

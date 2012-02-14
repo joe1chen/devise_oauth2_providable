@@ -10,7 +10,7 @@ describe Devise::Strategies::Oauth2RefreshTokenGrantTypeStrategy do
           @refresh_token = client.refresh_tokens.create! :user => user
           params = {
             :grant_type => 'refresh_token',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :refresh_token => @refresh_token.token
           }
@@ -38,7 +38,7 @@ describe Devise::Strategies::Oauth2RefreshTokenGrantTypeStrategy do
           @refresh_token = client.refresh_tokens.create! :user => user
           params = {
             :grant_type => 'refresh_token',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :refresh_token => 'invalid'
           }
@@ -90,7 +90,7 @@ describe Devise::Strategies::Oauth2RefreshTokenGrantTypeStrategy do
           @refresh_token = client.refresh_tokens.create! :user => user
           params = {
             :grant_type => 'refresh_token',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :refresh_token => @refresh_token.token
           }

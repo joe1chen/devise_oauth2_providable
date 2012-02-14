@@ -13,7 +13,7 @@ module Devise
 
       def client
         return @client if @client
-        @client = Devise::Oauth2Providable::Client.find_by_identifier params[:client_id]
+        @client = Devise::Oauth2Providable::Client.first(:conditions=>{:cidentifier=>params[:client_id]}) 
         env[Devise::Oauth2Providable::CLIENT_ENV_REF] = @client
         @client
       end
