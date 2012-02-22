@@ -17,13 +17,13 @@ class Devise::Oauth2Providable::Client
   before_validation :init_identifier, :on => :create, :unless => :cidentifier?
   before_validation :init_secret, :on => :create, :unless => :secret?
   validates :website, :secret, :presence => true
-  #validates :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => true
   validates :cidentifier, :presence => true, :uniqueness => true
-
+  index "cidentifier"
   attr_accessible :name, :website, :redirect_uri
 
   def self.find_by_client_identifier(cid)
-    
+    first(conditions:{cidentifier:cid})
   end
   
   private

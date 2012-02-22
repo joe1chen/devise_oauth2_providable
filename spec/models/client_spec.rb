@@ -13,7 +13,7 @@ describe Devise::Oauth2Providable::Client do
     it { should allow_mass_assignment_of :website }
     it { should allow_mass_assignment_of :redirect_uri }
     it { should validate_uniqueness_of :cidentifier }
-    it { should have_db_index(:cidentifier).unique(true) }
+    # it { should have_index_for(:cidentifier) }
     it { should_not allow_mass_assignment_of :cidentifier }
     it { should_not allow_mass_assignment_of :secret }
     it { should have_many :refresh_tokens }

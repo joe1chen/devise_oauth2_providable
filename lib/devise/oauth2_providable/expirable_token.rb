@@ -10,7 +10,9 @@ module Devise
         def expires_according_to(config_name)
           cattr_accessor :default_lifetime
           self.default_lifetime = Rails.application.config.devise_oauth2_providable[config_name]
-
+          
+          field :token, :type=>String
+          field :expires_at, :type=> Time
           belongs_to :user
           belongs_to :client, :class_name=> "Devise::Oauth2Providable::Client"
 
@@ -19,14 +21,19 @@ module Devise
           validates :expires_at, :presence => true
           validates :client, :presence => true
           validates :token, :presence => true, :uniqueness => true
-
-          scope :not_expired, lambda {
-            #where(self.arel_table[:expires_at].gteq(Time.now.utc))
-             self.where(:expires_at.gt => Time.now.utc)
-          }
-          default_scope not_expired
+          index "expires_at"
+          index "token"
+          index "user.id"
+          index "client.id"
+          scope :not_expired,where(:expires_at.gt => Time.now.utc)
+          
 
           include LocalInstanceMethods
+          
+          def self.find_by_token(tok)
+            first(:conditions=>{:token=>tok,:expires_at.gt => Time.now.utc})
+         end
+           
         end
       end
 
@@ -48,7 +55,7 @@ module Devise
           self.token = Devise::Oauth2Providable.random_id
         end
         def init_expires_at
-          self.expires_at = self.default_lifetime.from_now
+          self.expires_at = self.default_lifetime.from_now.to_time.utc
         end
       end
     end

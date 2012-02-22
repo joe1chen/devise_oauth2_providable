@@ -7,18 +7,13 @@ class Devise::Oauth2Providable::AccessToken
   
   
   belongs_to :refresh_token, :class_name=> "Devise::Oauth2Providable::RefreshToken" 
-  field :token
-  field :expires_at
-  
 
-    
+  
   expires_according_to :access_token_expires_in
 
   before_validation :restrict_expires_at, :on => :create, :if => :refresh_token
 
-  def self.find_by_token(tok)
-    self.first(:conditions=>{:token=>tok})
-  end
+
   
   def token_response
     response = {

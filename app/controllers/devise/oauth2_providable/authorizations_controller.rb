@@ -9,10 +9,12 @@ module Devise
       end
 
       def new
+      
         respond *authorize_endpoint.call(request.env)
       end
 
       def create
+       
         respond *authorize_endpoint(:allow_approval).call(request.env)
       end
 
@@ -32,7 +34,7 @@ module Devise
       def authorize_endpoint(allow_approval = false)
         Rack::OAuth2::Server::Authorize.new do |req, res|
         
-          @client = Devise::Oauth2Providable::Client.first(:conditions=> {:cidentifier=>req.client_id}) || req.bad_request!
+          @client = Devise::Oauth2Providable::Client.find_by_client_identifier(req.client_id) || req.bad_request!
           res.redirect_uri = @redirect_uri = req.verify_redirect_uri!(@client.redirect_uri)
           if allow_approval
             if params[:approve].present?

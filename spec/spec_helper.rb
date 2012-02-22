@@ -22,11 +22,15 @@ def dump_database
    end
 end
 
-dump_database
+
 
 RSpec.configure do |config|
+  
   config.include Devise::TestHelpers, :type => :controller
-
+  config.include Mongoid::Matchers
+  config.before(:each) do
+       dump_database
+      end
   #config.use_transactional_fixtures = true
 
   # enable rendering of views for controller tests
@@ -35,3 +39,4 @@ RSpec.configure do |config|
 end
 
 #ActiveRecord::Migrator.migrate(File.expand_path("dummy/db/migrate/", spec_root))
+

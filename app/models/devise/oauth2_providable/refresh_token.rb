@@ -4,12 +4,8 @@ class Devise::Oauth2Providable::RefreshToken
   include Devise::Oauth2Providable::ExpirableToken
   store_in :refresh_tokens
 
-  field :token, :type=>String
-  field :expires_at, :type=> DateTime
   
-  def self.find_by_token(tok)
-     self.first(:conditions=>{:token=>tok})
-   end
+
   
   expires_according_to :refresh_token_expires_in
 
