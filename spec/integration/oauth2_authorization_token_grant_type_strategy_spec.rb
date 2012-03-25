@@ -10,7 +10,7 @@ describe Devise::Strategies::Oauth2AuthorizationCodeGrantTypeStrategy do
           @authorization_code = user.authorization_codes.create(:client_id => client, :redirect_uri => client.redirect_uri)
           params = {
             :grant_type => 'authorization_code',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :code => @authorization_code.token
           }
@@ -40,7 +40,7 @@ describe Devise::Strategies::Oauth2AuthorizationCodeGrantTypeStrategy do
           @authorization_code = user.authorization_codes.create(:client_id => client, :redirect_uri => client.redirect_uri)
           params = {
             :grant_type => 'authorization_code',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :code => @authorization_code.token
           }
@@ -65,7 +65,7 @@ describe Devise::Strategies::Oauth2AuthorizationCodeGrantTypeStrategy do
           @authorization_code = user.authorization_codes.create(:client_id => client, :redirect_uri => client.redirect_uri)
           params = {
             :grant_type => 'authorization_code',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => client.secret,
             :code => 'invalid'
           }
@@ -89,7 +89,7 @@ describe Devise::Strategies::Oauth2AuthorizationCodeGrantTypeStrategy do
           @authorization_code = user.authorization_codes.create(:client_id => client, :redirect_uri => client.redirect_uri)
           params = {
             :grant_type => 'authorization_code',
-            :client_id => client.identifier,
+            :client_id => client.cidentifier,
             :client_secret => 'invalid',
             :code => @authorization_code.token
           }

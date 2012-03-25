@@ -1,9 +1,20 @@
-class Devise::Oauth2Providable::AccessToken < ActiveRecord::Base
+class Devise::Oauth2Providable::AccessToken 
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Devise::Oauth2Providable::ExpirableToken
+  store_in :access_tokens
+  
+  
+  
+  belongs_to :refresh_token, :class_name=> "Devise::Oauth2Providable::RefreshToken" 
+
+  
   expires_according_to :access_token_expires_in
 
   before_validation :restrict_expires_at, :on => :create, :if => :refresh_token
-  belongs_to :refresh_token
 
+
+  
   def token_response
     response = {
       :access_token => token,
@@ -13,6 +24,7 @@ class Devise::Oauth2Providable::AccessToken < ActiveRecord::Base
     response[:refresh_token] = refresh_token.token if refresh_token
     response
   end
+
 
   private
 

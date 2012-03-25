@@ -1,0 +1,15 @@
+development:
+  host: localhost
+  database: oauth_development
+
+test:
+  host: <%= ENV['TEST_DB_HOST'] || 'localhost' %>
+  database: oauth_test
+
+staging:
+  host: localhost
+  database: oauth_staging
+
+production:
+  uri: <%= ENV['MONGOHQ_URL'] || ENV['DATABASE_URL'] %>
+  database: ouath_production

@@ -34,8 +34,9 @@ module Devise
         ::Rails.application.routes.draw do
 
           # unnamed_routes = engine.routes.routes - named_routes.values
-
+        
           engine.routes.routes.each do |route|
+
             # Call the method by hand based on the symbol
             path = "/#{engine_name.underscore}#{route.path}"
             requirements = route.requirements
@@ -47,8 +48,22 @@ module Devise
               # will still work
               resourced_routes << route.requirements[:controller].gsub("#{engine_name.downcase}/", "").to_sym
             end
-
+            
+            # updated to deal ith routes have regexp verbs 
+            verb = :get
+            if(route.verb.class == Regexp)
+              _verb = route.verb.to_s
+              ["GET","POST","PUT","DELETE"].each do |v|
+                if _verb.index(v)
+                  verb = v.downcase.to_sym
+                end
+              end
+            else
             verb = (route.verb.blank? ? "GET" : route.verb).downcase.to_sym
+            
+            end
+
+            
             send(verb, path, requirements) if respond_to?(verb)
           end
   
