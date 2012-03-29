@@ -24,8 +24,8 @@ module Devise
 
           index "expires_at"
           index "token"
-          index "user.id"
-          index "client.id"
+          index "user_id"
+          index "client_id"
           scope :not_expired,where(:expires_at.gt => Time.now.utc)
 
           include LocalInstanceMethods
