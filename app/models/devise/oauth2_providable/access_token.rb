@@ -2,10 +2,8 @@ class Devise::Oauth2Providable::AccessToken
   include Mongoid::Document
   include Mongoid::Timestamps
   include Devise::Oauth2Providable::ExpirableToken
-  store_in :access_tokens
-  
-  
-  
+  store_in collection: "access_tokens"
+ 
   belongs_to :refresh_token, :class_name=> "Devise::Oauth2Providable::RefreshToken" 
 
   

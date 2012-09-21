@@ -1,15 +1,20 @@
 development:
-  host: localhost
-  database: oauth_development
+  sessions:
+    default:
+      database: oauth_development
+      hosts:
+        - localhost:27017
 
 test:
-  host: <%= ENV['TEST_DB_HOST'] || 'localhost' %>
-  database: oauth_test
-
-staging:
-  host: localhost
-  database: oauth_staging
+  sessions:
+    default:
+      database: oauth_test
+      hosts:
+        - <%= ENV['TEST_DB_HOST'] || 'localhost' %>:27017
 
 production:
-  uri: <%= ENV['MONGOHQ_URL'] || ENV['DATABASE_URL'] %>
-  database: ouath_production
+  sessions:
+    default:
+      database: oauth_production
+      hosts:
+        - <%= ENV['MONGOHQ_URL'] || ENV['DATABASE_URL'] %>:27017

@@ -17,7 +17,7 @@ ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 # in spec/support/ and its subdirectories.
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
 def dump_database
-   Mongoid::Config.master.collections.each do |collection|
+   Mongoid.session(:default).collections.each do |collection|
      collection.drop unless collection.name.include?('system.')
    end
 end
