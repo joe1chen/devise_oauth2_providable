@@ -1,7 +1,7 @@
 class Devise::Oauth2Providable::Client 
   include Mongoid::Document
   include Mongoid::Timestamps
-  store_in :clients
+  store_in collection: "clients"
   
   field  :name, :type => String
   field  :redirect_uri, :type => String
@@ -19,11 +19,11 @@ class Devise::Oauth2Providable::Client
   validates :website, :secret, :presence => true
   validates :name, :presence => true, :uniqueness => true
   validates :cidentifier, :presence => true, :uniqueness => true
-  index "cidentifier"
+  index "cidentifier" => 1
   attr_accessible :name, :website, :redirect_uri
 
   def self.find_by_client_identifier(cid)
-    first(conditions:{cidentifier:cid})
+    where(cidentifier: cid).first
   end
   
   private

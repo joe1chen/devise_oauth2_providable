@@ -172,7 +172,6 @@ describe Devise::Strategies::Oauth2PasswordGrantTypeStrategy do
             :username => @user.email,
             :password => 'bar'
           }
-
           post '/oauth2/token', params
         end
         it { response.code.to_i.should == 400 }

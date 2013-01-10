@@ -49,7 +49,7 @@ describe Devise::Oauth2Providable::AccessToken do
         @access_token = Devise::Oauth2Providable::AccessToken.create! :client => client, :refresh_token => @refresh_token
       end
       it 'should set the access token expires_at to equal refresh token' do
-        @access_token.expires_at.should == @soon
+        @access_token.expires_at.should.eql? @soon
       end
     end
   end

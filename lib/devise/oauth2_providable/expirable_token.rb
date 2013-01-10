@@ -21,17 +21,17 @@ module Devise
           validates :expires_at, :presence => true
           validates :client, :presence => true
           validates :token, :presence => true, :uniqueness => true
-
-          index "expires_at"
-          index "token"
-          index "user_id"
-          index "client_id"
+          index "expires_at" => 1
+          index "token" => 1
+          index "user.id" => 1
+          index "client.id" => 1
           scope :not_expired,where(:expires_at.gt => Time.now.utc)
+          
 
           include LocalInstanceMethods
           
           def self.find_by_token(tok)
-            first(:conditions=>{:token=>tok,:expires_at.gt => Time.now.utc})
+            where(token: tok).where(:expires_at.gt => Time.now.utc).first
          end
            
         end
