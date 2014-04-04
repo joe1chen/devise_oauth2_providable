@@ -10,9 +10,9 @@ class Devise::Oauth2Providable::Client
   field  :secret, :type => String
   
   
-  has_many :access_tokens, :class_name=> "Devise::Oauth2Providable::AccessToken" 
-  has_many :refresh_tokens, :class_name=>  "Devise::Oauth2Providable::RefreshToken" 
-  has_many :authorization_codes, :class_name=> "Devise::Oauth2Providable::AuthorizationCode"
+  has_many :access_tokens, :class_name=> "Devise::Oauth2Providable::AccessToken", dependent: :destroy
+  has_many :refresh_tokens, :class_name=>  "Devise::Oauth2Providable::RefreshToken", dependent: :destroy
+  has_many :authorization_codes, :class_name=> "Devise::Oauth2Providable::AuthorizationCode", dependent: :destroy
 
   before_validation :init_identifier, :on => :create, :unless => :cidentifier?
   before_validation :init_secret, :on => :create, :unless => :secret?
