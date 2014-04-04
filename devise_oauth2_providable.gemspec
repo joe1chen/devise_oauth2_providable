@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "devise_oauth2_providable"
 
   s.add_runtime_dependency(%q<rails>, [">= 3.1.0"])
-  s.add_runtime_dependency(%q<devise>, [">= 1.4.3"])
-  s.add_runtime_dependency(%q<rack-oauth2>, ["~> 0.11.0"])
-  s.add_development_dependency(%q<rspec-rails>, ['2.8.1'])
-  s.add_development_dependency(%q<shoulda-matchers>, ['1.0.0.beta3'])
+  s.add_runtime_dependency(%q<devise>, [">= 3"])
+  s.add_runtime_dependency(%q<rack-oauth2>, [">= 0.11.0"])
+  s.add_development_dependency(%q<rspec-rails>, ['~> 2.11.0'])
+  s.add_development_dependency(%q<shoulda-matchers>, ['~> 1.3.0'])
   s.add_development_dependency(%q<pry>, ['0.9.6.2'])
   s.add_development_dependency(%q<factory_girl>, ['2.3.2'])
   s.add_development_dependency(%q<factory_girl_rspec>, ['0.0.1'])
