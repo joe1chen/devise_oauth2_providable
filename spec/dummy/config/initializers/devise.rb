@@ -16,6 +16,9 @@ Devise.setup do |config|
   #require 'devise/orm/active_record'
   require 'devise/orm/mongoid'
 
+  # Automatically apply schema changes in tableless databases
+  config.apply_schema = false
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -92,6 +95,10 @@ Devise.setup do |config|
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
+
+  # If true, uses the password salt as remember token. This should be turned
+  # to false if you are not using database authenticatable.
+  config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
@@ -204,6 +211,4 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-
-  config.secret_key = 'f1599b0f9a5085c4c8d4f9fcc4ff7dd780c5f3da5de41e884b39f5eab955541807aa4e28959b6c78a4ba794caf3c2d2bce5c45aa96effd7e6ceaaf91af021582'
 end
