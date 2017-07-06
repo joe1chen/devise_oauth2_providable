@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "devise_oauth2_providable"
 
-  s.add_runtime_dependency(%q<rails>, [">= 3.1.0"])
+  s.add_runtime_dependency(%q<rails>, [">= 4"])
   s.add_runtime_dependency(%q<devise>, [">= 1.4.3"])
   s.add_runtime_dependency(%q<rack-oauth2>, ["~> 0.11.0"])
   s.add_development_dependency(%q<rspec-rails>, ['2.6.1'])
