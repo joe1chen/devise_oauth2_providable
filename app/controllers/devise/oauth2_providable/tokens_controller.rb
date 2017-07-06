@@ -9,7 +9,7 @@ class Devise::Oauth2Providable::TokensController < ApplicationController
   end
   private
   def oauth2_current_client
-   env[Devise::Oauth2Providable::CLIENT_ENV_REF]
+    env[Devise::Oauth2Providable::CLIENT_ENV_REF]
   end
   def oauth2_current_refresh_token
     env[Devise::Oauth2Providable::REFRESH_TOKEN_ENV_REF]
